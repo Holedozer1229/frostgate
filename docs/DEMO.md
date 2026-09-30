@@ -54,7 +54,8 @@ via `testnet.zec.rocks:443`:
 cargo run -q -p frostgate-coordinator --example d8_demo_live
 ```
 
-Expected output (values vary per run; structure does not):
+Historical example output from the first D8 run (values vary per run — a fresh
+destination key, txid, and change output are minted each time; structure does not):
 
 ```
 === Frostgate D8: live quorum settlement (testnet) ===
@@ -97,6 +98,10 @@ The historical live releases (all independently verifiable on testnet):
 | D7 (direct) | `aa8972f2829ef07ab9efa7b636f38f83df859e9db0dfa0eca56cefdf5d785b5c` | 4,419,993 | 9,000,000 zat |
 | D7b (quorum) | `54a36d22f06f22740ccc061612decba7cd7a58203df9d68179e26a64dd52a8c6` | 4,419,998 | 100,000 zat |
 | D8 (quorum) | `7f6cc65612b6f7e79ee679bf64013204d3ce92486269cd705330ad78f4db11bd` | 4,420,002 | 100,000 zat |
+| D8 rerun (quorum, auto-discovering vault) | `1767009eee0a104682221fdfdebe7a141c1842bcc3d172e0eb85510f94289eda` | 4,420,003 | 100,000 zat |
+
+Current vault after the rerun: `1767009e...:1` = 660,000 zat (the example now
+auto-discovers the latest vault UTXO, so a rerun spends from here).
 
 ## 4. What the demo does NOT show (honesty section)
 

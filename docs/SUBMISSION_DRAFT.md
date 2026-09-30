@@ -1,6 +1,8 @@
 # Frostgate — Colosseum Submission Draft
 
-*Prepared 2026-09-30. Travis authorized Hal to submit. Deadline: Oct 12, 2026, 11:59 PM PT (provisional — confirm from live dashboard).*
+*Prepared 2026-09-30. Travis authorized Hal to submit. Deadline: **Oct 12, 2026, 11:59 PM PDT** (official, from colosseum.com/worldsfair). Zcash track: **$100,000 pool — 10 projects × $10,000** (official). Total hackathon prizes: $840,000 + $2.5M accelerator seed funding (official).*
+
+> ⚠️ **Action needed:** Travis's Arena profile is INCOMPLETE — the dashboard banner says "Complete your profile ... to be eligible to compete." Builder details (bio, skills, links) show "Nothing to see here!" This must be fixed before submission.
 
 ## Project name
 Frostgate

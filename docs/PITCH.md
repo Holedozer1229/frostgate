@@ -41,8 +41,8 @@ command.
 
 Two things make Frostgate different from every "secure bridge" pitch. First,
 the cryptography is not ours: FROST was built and audited at the **Zcash
-Foundation**, and this is its first deployment as bridge custody — Zcash
-cryptography securing Bitcoin via Taproot. Second, the trust model is stated
+Foundation**, and Frostgate puts the ZF implementation to work as bridge
+custody — Zcash cryptography securing Bitcoin via Taproot. Second, the trust model is stated
 honestly, in the README, in writing: what is threshold, what is not, and
 exactly where the remaining trust lives. No "trustless" theater.
 
@@ -69,9 +69,10 @@ Frostgate removes the key. There is nothing left to steal.
 ## Why the Zcash track
 
 FROST is Zcash Foundation cryptography — designed, implemented, and audited
-there (RFC 9591). Frostgate is its first live deployment as cross-chain
-bridge custody, and it pays the technology back: every quorum attestation in
-Frostgate is a FROST signature, and the demo settles onto the Zcash testnet.
+there (RFC 9591). Frostgate is a live deployment of the ZF implementation as
+cross-chain bridge custody, and it pays the technology back: every quorum
+attestation in Frostgate is a FROST signature, and the demo settles onto the
+Zcash testnet.
 This is ZF research securing real value flows, which is the best possible
 advertisement for the Zcash ecosystem's cryptographic leadership.
 
