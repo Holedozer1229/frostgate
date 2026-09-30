@@ -1,7 +1,8 @@
 # Frostgate — Threshold Federation Custody for Cross-Chain Bridges
 
-**Bridges are crypto's #1 loss vector — and every major bridge hack was a
-custody failure: one key, one server, one compromise.** Frostgate removes the
+**Bridges are crypto's #1 loss vector — every major bridge hack was a failure
+of the bridge's trust assumptions: Ronin fell to compromised validator keys;
+Poly, Wormhole, and Nomad fell to contract-level verification bugs.** Frostgate removes the
 key entirely. Five independent operators jointly custody a single Bitcoin
 Taproot address through a **dealerless 3-of-5 FROST threshold ceremony** (built
 on the Zcash Foundation's RFC 9591 implementation). No single operator ever

@@ -1,6 +1,6 @@
 # Frostgate — Colosseum Submission Draft
 
-*Prepared 2026-09-30. Travis authorized Hal to submit. Deadline: **Oct 12, 2026, 11:59 PM PDT** (official, from colosseum.com/worldsfair). Zcash track: **$100,000 pool — 10 projects × $10,000** (official). Total hackathon prizes: $840,000 + $2.5M accelerator seed funding (official).*
+*Prepared 2026-09-30. Travis authorized Hal to submit. Deadline: **Oct 12, 2026, 11:59 PM PDT** (official, from colosseum.com/worldsfair). Zcash track: **$100,000 pool — 10 projects × $10,000** (per event coverage; the official prizes page lists the $840,000 total without a per-track breakdown). Total hackathon prizes: $840,000 + $2.5M accelerator seed funding (official).*
 
 > ⚠️ **Action needed:** Travis's Arena profile is INCOMPLETE — the dashboard banner says "Complete your profile ... to be eligible to compete." Builder details (bio, skills, links) show "Nothing to see here!" This must be fixed before submission.
 
@@ -52,4 +52,4 @@ Core crates MIT/Apache-2.0 dual license. All-permissive dependency tree (no copy
 Yes — disclosed in PRE_EVENT_STATE.md in the repo root: pre-event federated M-of-N bridge design with 30-bps toll schedule, replay protection, supply invariants. All threshold-cryptography work (DKG, FROST ceremony, operator relay, coordinator settlement, Zcash BLAKE2b-256 sighash) was built during the hackathon.
 
 ## Business framing (from docs/BUSINESS_PLAN.md)
-Problem: bridges are crypto's #1 loss vector (Ronin $625M, Poly $611M, Wormhole $326M, Nomad $190M) — every one a custody failure. Product: threshold-federation custody with no trusted dealer. Revenue lanes: 30-bps bridge toll (inherited design), quorum-as-a-service, mainnet custody pilot. Ask: $250k pre-seed via the Colosseum accelerator.
+Problem: bridges are crypto's #1 loss vector (Ronin $625M via key compromise; Poly $611M, Wormhole $326M, Nomad $190M via contract verification bugs) — every one a failure of the bridge's trust assumptions. Product: threshold-federation custody with no trusted dealer. Revenue lanes: 30-bps bridge toll (inherited design), quorum-as-a-service, mainnet custody pilot. Ask: $250k pre-seed via the Colosseum accelerator.

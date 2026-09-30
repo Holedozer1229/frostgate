@@ -4,10 +4,12 @@
 
 ## 1. The problem
 
-Cross-chain bridges are crypto's #1 loss vector. Ronin ($625M), Poly Network
-($611M), Wormhole ($326M), Nomad ($190M) — every one was a custody failure, not
-a cryptography failure: a single key, a single server, a single compromised
-signer set. Chainalysis estimated over $2B stolen from bridges in 2021–2022
+Cross-chain bridges are crypto's #1 loss vector. Ronin ($625M) fell to
+compromised validator keys; Poly Network ($611M), Wormhole ($326M), and Nomad
+($190M) fell to contract-level verification bugs — a hijacked cross-chain
+call, a forged guardian signature, a trusted root initialized to zero.
+Different failures, same lesson: the bridge's trust assumptions are the attack
+surface. Chainalysis estimated over $2B stolen from bridges in 2021–2022
 alone. The industry's answer so far has been multisig committees — which still
 have trusted dealers, still coordinate off-chain, and still present N keys to
 attack instead of zero.

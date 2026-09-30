@@ -9,11 +9,12 @@ World's Fair, Zcash track.*
 
 **[0:00–0:25 — The problem]**
 
-Bridges are crypto's number-one loss vector. Ronin: $625 million. Wormhole:
-$320 million. Nomad, Multichain — billions gone. And every single one was the
-same failure: *custody*. One key, one server, one small multisig group — one
-compromise and the money is gone. The bridge didn't fail at cryptography. It
-failed at *who holds the key*.
+Bridges are crypto's number-one loss vector. Ronin: $625 million — validator
+keys compromised. Wormhole: $320 million — a guardian signature check bypassed.
+Nomad, Poly Network, Multichain — billions gone to contract-level verification
+bugs. Different failures, same lesson: the bridge failed at its *trust
+assumptions*. Frostgate shrinks that surface to one thing: a 3-of-5 FROST
+quorum with no trusted dealer and no single key to steal.
 
 **[0:25–0:50 — The insight]**
 
@@ -40,8 +41,9 @@ command.
 **[1:50–2:20 — Why this wins]**
 
 Two things make Frostgate different from every "secure bridge" pitch. First,
-the cryptography is not ours: FROST was built and audited at the **Zcash
-Foundation**, and Frostgate puts the ZF implementation to work as bridge
+the cryptography is not ours: the FROST core crates were built at the **Zcash
+Foundation** and NCC-audited (our `frost-secp256k1-tr` dependency was outside
+that audit's scope), and Frostgate puts the ZF implementation to work as bridge
 custody — Zcash cryptography securing Bitcoin via Taproot. Second, the trust model is stated
 honestly, in the README, in writing: what is threshold, what is not, and
 exactly where the remaining trust lives. No "trustless" theater.
@@ -68,8 +70,8 @@ Frostgate removes the key. There is nothing left to steal.
 
 ## Why the Zcash track
 
-FROST is Zcash Foundation cryptography — designed, implemented, and audited
-there (RFC 9591). Frostgate is a live deployment of the ZF implementation as
+FROST is Zcash Foundation cryptography — designed and implemented there, with
+the core crates NCC-audited (RFC 9591). Frostgate is a live deployment of the ZF implementation as
 cross-chain bridge custody, and it pays the technology back: every quorum
 attestation in Frostgate is a FROST signature, and the demo settles onto the
 Zcash testnet.
