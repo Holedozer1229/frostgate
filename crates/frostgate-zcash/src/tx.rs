@@ -470,8 +470,7 @@ mod tests {
     #[test]
     fn sighash_matches_independent_python_vector() {
         let (unsigned, script_code, value) = fixture();
-        let sighash =
-            zip243_sighash(&unsigned, 0, &script_code, value, TEST_BRANCH_ID).unwrap();
+        let sighash = zip243_sighash(&unsigned, 0, &script_code, value, TEST_BRANCH_ID).unwrap();
         assert_eq!(crate::keys::hex_encode(&sighash), EXPECTED_SIGHASH_HEX);
     }
 
@@ -492,12 +491,10 @@ mod tests {
         let b = zip243_sighash(&unsigned, 0, &script_code, value, TEST_BRANCH_ID).unwrap();
         assert_eq!(a, b);
         // Different value -> different sighash (amount committed).
-        let c =
-            zip243_sighash(&unsigned, 0, &script_code, value + 1, TEST_BRANCH_ID).unwrap();
+        let c = zip243_sighash(&unsigned, 0, &script_code, value + 1, TEST_BRANCH_ID).unwrap();
         assert_ne!(a, c);
         // Different branch id -> different sighash (replay protection).
-        let d =
-            zip243_sighash(&unsigned, 0, &script_code, value, TEST_BRANCH_ID ^ 1).unwrap();
+        let d = zip243_sighash(&unsigned, 0, &script_code, value, TEST_BRANCH_ID ^ 1).unwrap();
         assert_ne!(a, d);
     }
 
@@ -510,8 +507,7 @@ mod tests {
         )
         .unwrap();
         let script_sig =
-            sign_p2pkh_input(&unsigned, 0, &secret, &script_code, value, TEST_BRANCH_ID)
-                .unwrap();
+            sign_p2pkh_input(&unsigned, 0, &secret, &script_code, value, TEST_BRANCH_ID).unwrap();
         // Parse scriptSig: push(sig) push(pubkey).
         assert_eq!(script_sig[0] as usize, script_sig.len() - 2 - 33);
         let sig_len = script_sig[0] as usize;
@@ -522,8 +518,7 @@ mod tests {
         assert_eq!(pubkey_bytes.len(), 33);
         // Verify ECDSA over the sighash.
         let secp = Secp256k1::new();
-        let sighash =
-            zip243_sighash(&unsigned, 0, &script_code, value, TEST_BRANCH_ID).unwrap();
+        let sighash = zip243_sighash(&unsigned, 0, &script_code, value, TEST_BRANCH_ID).unwrap();
         let msg = Message::from_digest(sighash);
         let sig = bitcoin::secp256k1::ecdsa::Signature::from_der(&der[..sig_len - 1]).unwrap();
         let pubkey = bitcoin::secp256k1::PublicKey::from_slice(pubkey_bytes).unwrap();

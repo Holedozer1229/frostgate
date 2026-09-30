@@ -18,9 +18,7 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 
 use bitcoin::hashes::{sha256, Hash};
-use frostgate_coordinator::{
-    CoordinatorService, OperatorRelay, PegIn, RelayFault, ServiceConfig,
-};
+use frostgate_coordinator::{CoordinatorService, OperatorRelay, PegIn, RelayFault, ServiceConfig};
 use frostgate_federation::{run_dkg, CeremonyConfig};
 use frostgate_zcash::address::p2pkh_testnet;
 use frostgate_zcash::client::{ChainClient, ChainUtxo, ClientError};
@@ -29,8 +27,7 @@ use rand::rngs::OsRng;
 use serde_json::Value;
 
 /// The D7 release txid; its vout 1 (990_000 zat) is the funded vault change.
-const VAULT_TXID: &str =
-    "aa8972f2829ef07ab9efa7b636f38f83df859e9db0dfa0eca56cefdf5d785b5c";
+const VAULT_TXID: &str = "aa8972f2829ef07ab9efa7b636f38f83df859e9db0dfa0eca56cefdf5d785b5c";
 const VAULT_VOUT: u32 = 1;
 
 /// Rehearsal-only chain client: shells out to the `.dev` Python helpers
@@ -42,7 +39,10 @@ struct LwdBridge {
 
 impl LwdBridge {
     fn new(dev_dir: PathBuf, vault_addr: String) -> Self {
-        Self { dev_dir, vault_addr }
+        Self {
+            dev_dir,
+            vault_addr,
+        }
     }
 
     fn query(&self, args: &[&str]) -> Result<String, ClientError> {
@@ -54,7 +54,10 @@ impl LwdBridge {
         if !out.status.success() {
             return Err(ClientError::Transport(format!(
                 "lwd_query.py failed: {}",
-                String::from_utf8_lossy(&out.stderr).chars().take(200).collect::<String>()
+                String::from_utf8_lossy(&out.stderr)
+                    .chars()
+                    .take(200)
+                    .collect::<String>()
             )));
         }
         String::from_utf8(out.stdout)
@@ -217,7 +220,8 @@ fn main() -> anyhow::Result<()> {
     let mut svc = CoordinatorService::new(group_pkg, 5, 3, relay, chain, release_key, cfg)?;
 
     // ---- Synthetic rehearsal peg-in (labeled; the BTC leg was proven on regtest) ----
-    let pegin_txid = hex_encode(&sha256::Hash::hash(b"frostgate-d7b-rehearsal-pegin").to_byte_array());
+    let pegin_txid =
+        hex_encode(&sha256::Hash::hash(b"frostgate-d7b-rehearsal-pegin").to_byte_array());
     let pegin = PegIn {
         txid_display: pegin_txid,
         vout: 0,
@@ -234,7 +238,10 @@ fn main() -> anyhow::Result<()> {
 
     println!();
     println!("--- settlement report ---");
-    println!("attestation message: {}", rep.attestation.attestation.message_hex()?);
+    println!(
+        "attestation message: {}",
+        rep.attestation.attestation.message_hex()?
+    );
     println!("quorum signers: {:?}", rep.signers);
     println!("excluded cheaters: {:?}", rep.excluded_cheaters);
     println!("release: {} zat to {dest_addr}", rep.release_zat);
@@ -242,6 +249,9 @@ fn main() -> anyhow::Result<()> {
     println!("quorum signature re-verifies: (checked inside settle)");
     println!("ZEC release txid (LIVE broadcast): {}", rep.release_txid);
     println!();
-    println!("verify: python3 .dev/lwd_query.py --tx {}", rep.release_txid);
+    println!(
+        "verify: python3 .dev/lwd_query.py --tx {}",
+        rep.release_txid
+    );
     Ok(())
 }
