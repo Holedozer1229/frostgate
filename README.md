@@ -23,10 +23,14 @@ bridge toll as the revenue engine. See [docs/BUSINESS_PLAN.md](docs/BUSINESS_PLA
 - **[IMPLEMENTED + MEASURED]** Single Taproot (P2TR) federation address; the on-chain key commits to the threshold group key via the BIP341 tweak, and all five operators independently derive the identical tweak (verified byte-for-byte against rust-bitcoin).
 - **[IMPLEMENTED + MEASURED]** Live threshold spend on Bitcoin regtest: federation funded with 1.0 BTC, operators 1–3 signed, spend confirmed — txid `c3dbc434d47fd6a27987241bf8384c936630cfa1f83656673ddf87fbbf977676`, mined in regtest block 103, federation balance 0.0 afterward.
 - **[IMPLEMENTED + MEASURED]** Bitcoin testnet3 peg-in watcher over public Esplora (`blockstream.info/testnet/api`), proxy-aware.
-- **[IMPLEMENTED + MEASURED]** Zcash testnet release path: v4 transparent transaction builder, ZIP-143 sighash and base58check address encoding cross-validated against independent from-scratch Python implementations.
+- **[IMPLEMENTED + MEASURED]** Zcash testnet release path: v4 transparent transaction builder, ZIP-243 BLAKE2b-256 sighash (pure-Rust, personalized) and base58check address encoding cross-validated against independent from-scratch Python implementations — and against the live chain.
 - **[IMPLEMENTED + MEASURED]** Coordinator service: peg-in → threshold attestation → ZEC release, with settlement journal and replay refusal.
 - **[IMPLEMENTED + MEASURED]** Adversarial demo: two operators offline → quorum of 3 still settles; one malicious share → detected, attributed, excluded, session retried with fresh nonces.
-- **59 tests pass, 0 fail. `cargo clippy -- -D warnings` clean. `cargo fmt --check` clean.**
+- **[IMPLEMENTED + MEASURED]** Live Zcash testnet releases via lightwalletd (`testnet.zec.rocks:443`):
+  - D7 (direct path): `aa8972f2829ef07ab9efa7b636f38f83df859e9db0dfa0eca56cefdf5d785b5c`, mined at height 4,419,993 — 9,000,000 zat released.
+  - D7b (full quorum path): `54a36d22f06f22740ccc061612decba7cd7a58203df9d68179e26a64dd52a8c6`, mined at height 4,419,998 — fresh 5-of-3 DKG → quorum-signed attestation → 100,000 zat released.
+  - D8 (reproducible quorum path): `7f6cc65612b6f7e79ee679bf64013204d3ce92486269cd705330ad78f4db11bd`, mined at height 4,420,002 — `cargo run -p frostgate-coordinator --example d8_demo_live` reproduces it end to end.
+- **60 tests pass, 0 fail. `cargo clippy -- -D warnings` clean. `cargo fmt --check` clean.**
 
 ## Architecture
 
@@ -117,6 +121,9 @@ withhold it from the release amount).
 ## Docs
 
 - [PRE_EVENT_STATE.md](PRE_EVENT_STATE.md) — pre-event disclosure
+- [docs/PITCH.md](docs/PITCH.md) — the 3-minute pitch + company case
+- [docs/DEMO.md](docs/DEMO.md) — reproducible demo instructions
+- [docs/TRUST_MODEL.md](docs/TRUST_MODEL.md) — trust model, stated precisely
 - [D4_ZCASH_RELEASE_PATH.md](D4_ZCASH_RELEASE_PATH.md) — Zcash leg design + measurements
 - [D5_D6_COORDINATOR.md](D5_D6_COORDINATOR.md) — coordinator + adversarial demo
 - [LICENSES.md](LICENSES.md) — dependency & license inventory (all permissive, no copyleft)

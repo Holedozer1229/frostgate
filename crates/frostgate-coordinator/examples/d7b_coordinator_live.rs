@@ -134,7 +134,9 @@ impl ChainClient for LwdBridge {
         let body = String::from_utf8_lossy(&out.stdout);
         let err_body = String::from_utf8_lossy(&out.stderr);
         for line in body.lines() {
-            if let Some(txid) = line.trim().strip_prefix("ACCEPTED txid=") {
+            if let Some(raw) = line.trim().strip_prefix("ACCEPTED txid=") {
+                // lwd_broadcast.py prints the txid JSON-quoted; strip quotes.
+                let txid = raw.trim().trim_matches('"');
                 if txid.len() == 64 && txid.chars().all(|c| c.is_ascii_hexdigit()) {
                     return Ok(txid.to_string());
                 }

@@ -20,3 +20,7 @@ __pycache__/
 # Editor noise
 .DS_Store
 *.swp
+
+# Downloaded node binaries / chain data (not source)
+.bitcoin-core/
+.zebrad/
