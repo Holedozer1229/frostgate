@@ -16,9 +16,10 @@ Zcash
 ## Repository
 https://github.com/Holedozer1229/frostgate (public, MIT/Apache-2.0)
 
-## Videos
-- Pitch video: https://youtu.be/2GzfhwevnXI
-- Demo video: https://youtu.be/y39ULUT2C3U
+## Videos (Colosseum-spec versions, unlisted)
+- Elevator pitch (0:32, spec: 30-second pitch): https://youtu.be/3hty44PFQH0
+- Technical walkthrough (3:39, spec: 3–5 minute video): https://youtu.be/BjN5Y7RLgYU
+- Earlier cuts (superseded, still unlisted): pitch https://youtu.be/2GzfhwevnXI, demo https://youtu.be/y39ULUT2C3U
 
 ## Logo
 `~/workspace/frostgate/assets/frostgate-logo.webp` — five shards converging on a keyhole.
