@@ -11,8 +11,8 @@
 //!   cargo run -p frostgate-coordinator --example d8_demo_live
 //!
 //! Requirements: python3 + curl on PATH, network access to
-//! testnet.zec.rocks:443, and a funded coordinator vault (the D7 change
-//! UTXO). Broadcasts a REAL testnet transaction.
+//! testnet.zec.rocks:443, and a funded coordinator vault (auto-discovered from
+//! the vault address). Broadcasts a REAL testnet transaction.
 
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -27,11 +27,6 @@ use frostgate_zcash::client::{ChainClient, ChainUtxo, ClientError};
 use frostgate_zcash::keys::{hex_encode, ReleaseKey};
 use rand::rngs::OsRng;
 use serde_json::Value;
-
-/// The D7 release txid; its vout 1 (990_000 zat) is the funded vault change.
-const VAULT_TXID: &str =
-    "54a36d22f06f22740ccc061612decba7cd7a58203df9d68179e26a64dd52a8c6";
-const VAULT_VOUT: u32 = 1;
 
 /// Rehearsal-only chain client: shells out to the `.dev` Python helpers
 /// that speak lightwalletd gRPC. Not for production (no auth, no retries).
@@ -91,6 +86,20 @@ impl LwdBridge {
             }
         }
         Ok(out)
+    }
+    /// Find the largest vault UTXO on the live chain (auto-discovery so the
+    /// example stays re-runnable as the vault change outpoint advances).
+    fn find_vault_utxo(&self) -> Result<(String, u32), ClientError> {
+        let body = self.query(&["--address", &self.vault_addr])?;
+        let mut best: Option<(String, u32, u64)> = None;
+        for (txid, vout, value, _) in self.parse_utxos(&body)? {
+            if best.as_ref().map_or(true, |b| value > b.2) {
+                best = Some((txid, vout, value));
+            }
+        }
+        best.map(|(t, v, _)| (t, v)).ok_or_else(|| {
+            ClientError::Transport("no vault UTXO found — fund the coordinator vault first".into())
+        })
     }
 }
 
@@ -212,7 +221,11 @@ fn main() -> anyhow::Result<()> {
     let dest_addr = p2pkh_testnet(&dest_key.public_key_compressed());
     println!("dest:  {dest_addr}");
 
-    let mut cfg = ServiceConfig::demo(dest_addr.clone(), VAULT_TXID.to_string(), VAULT_VOUT);
+    // ---- Live vault: auto-discover the current vault UTXO ----
+    let (vault_txid, vault_vout) = chain.find_vault_utxo()?;
+    println!("vault utxo: {vault_txid}:{vault_vout}");
+
+    let mut cfg = ServiceConfig::demo(dest_addr.clone(), vault_txid, vault_vout);
     cfg.expiry_delta = 5000; // live buffer, same posture as D7
     let mut svc = CoordinatorService::new(group_pkg, 5, 3, relay, chain, release_key, cfg)?;
 
