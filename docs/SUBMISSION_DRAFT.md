@@ -17,8 +17,8 @@ Zcash
 https://github.com/Holedozer1229/frostgate (public, MIT/Apache-2.0)
 
 ## Videos
-- Pitch video: [YouTube unlisted link — upload pending]
-- Demo video: [YouTube unlisted link — upload pending]
+- Pitch video: https://youtu.be/2GzfhwevnXI
+- Demo video: https://youtu.be/y39ULUT2C3U
 
 ## Logo
 `~/workspace/frostgate/assets/frostgate-logo.webp` — five shards converging on a keyhole.
