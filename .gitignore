@@ -24,3 +24,6 @@ __pycache__/
 # Downloaded node binaries / chain data (not source)
 .bitcoin-core/
 .zebrad/
+
+# REAL mainnet key material — never commit
+mainnet-vault/
