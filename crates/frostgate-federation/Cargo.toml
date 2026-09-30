@@ -1,0 +1,18 @@
+[package]
+name = "frostgate-federation"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Reusable FROST threshold-signing ceremony for federations (built on the Zcash Foundation frost crates, RFC 9591)"
+
+[dependencies]
+frost-core = { version = "3", features = ["serde"] }
+frost-secp256k1-tr = "3"
+rand = "0.8"
+rand_core = "0.6"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+
+[dev-dependencies]
+tempfile = "3"

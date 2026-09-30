@@ -1,0 +1,18 @@
+[package]
+name = "frostgate-operator"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Frostgate federation operator CLI (DKG ceremony, key management)"
+
+[[bin]]
+name = "frostgate-operator"
+path = "src/main.rs"
+
+[dependencies]
+frostgate-federation = { path = "../frostgate-federation" }
+frostgate-bitcoin = { path = "../frostgate-bitcoin" }
+bitcoin = "0.32"
+clap = { version = "4", features = ["derive"] }
+rand = "0.8"
+anyhow = "1"

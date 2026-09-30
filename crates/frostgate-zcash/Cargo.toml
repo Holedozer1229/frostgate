@@ -1,0 +1,21 @@
+[package]
+name = "frostgate-zcash"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Zcash leg of Frostgate: testnet transparent wallet, v4 transaction builder (ZIP-143), JSON-RPC chain client, FROST release attestation format"
+
+[dependencies]
+# secp256k1 comes via the bitcoin crate's re-export (same version the
+# federation already builds against: no second secp256k1 in the tree).
+bitcoin = "0.32"
+bitcoin_hashes = "0.14"
+base64 = "0.22"
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+ureq = { version = "2", default-features = false, features = ["tls", "json"] }
+
+[dev-dependencies]
+rand = "0.8"

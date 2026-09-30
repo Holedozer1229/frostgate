@@ -1,0 +1,22 @@
+# Rust build output
+/target/
+Cargo.lock
+
+# Secrets: NEVER commit keys or ceremony material
+rehearsal/
+regtest-ceremony/
+ceremony/
+coordinator-journal.json
+*.pem
+*.key
+
+# Local node data
+.regtest/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Editor noise
+.DS_Store
+*.swp
