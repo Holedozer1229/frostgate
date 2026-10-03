@@ -89,7 +89,7 @@ advertisement for the Zcash ecosystem's cryptographic leadership.
 | Full quorum path, live | txid `54a36d22…52a8c6`, mined at height 4,419,998 |
 | Reproducible quorum path | txid `7f6cc656…f4db11bd`, mined at height 4,420,002 |
 | Adversarial resilience | `demo --fault offline:1,2` and `--fault malicious:2` |
-| Test suite | 60 pass, 0 fail, clippy + fmt clean |
+| Test suite | 62 pass, 0 fail, clippy + fmt clean |
 
 ## The ask
 

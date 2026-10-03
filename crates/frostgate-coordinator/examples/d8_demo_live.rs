@@ -97,7 +97,7 @@ impl LwdBridge {
         let body = self.query(&["--address", &self.vault_addr])?;
         let mut best: Option<(String, u32, u64)> = None;
         for (txid, vout, value, _) in self.parse_utxos(&body)? {
-            if best.as_ref().map_or(true, |b| value > b.2) {
+            if best.as_ref().is_none_or(|b| value > b.2) {
                 best = Some((txid, vout, value));
             }
         }

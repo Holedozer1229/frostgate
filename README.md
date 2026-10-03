@@ -32,7 +32,7 @@ bridge toll as the revenue engine. See [docs/BUSINESS_PLAN.md](docs/BUSINESS_PLA
   - D7b (full quorum path): `54a36d22f06f22740ccc061612decba7cd7a58203df9d68179e26a64dd52a8c6`, mined at height 4,419,998 — fresh 5-of-3 DKG → quorum-signed attestation → 100,000 zat released.
   - D8 (reproducible quorum path): `7f6cc65612b6f7e79ee679bf64013204d3ce92486269cd705330ad78f4db11bd`, mined at height 4,420,002 — `cargo run -p frostgate-coordinator --example d8_demo_live` reproduces the full path end to end (each run mints a fresh txid and destination).
   - D8 rerun (auto-discovering vault UTXO): `1767009eee0a104682221fdfdebe7a141c1842bcc3d172e0eb85510f94289eda`, mined at height 4,420,003 — 100,000 zat released, 660,000 zat change. Current vault: `1767009e...:1` = 660,000 zat.
-- **60 tests pass, 0 fail. `cargo clippy -- -D warnings` clean. `cargo fmt --check` clean.**
+- **62 tests pass, 0 fail. `cargo clippy -- -D warnings` clean. `cargo fmt --check` clean.**
 
 ## Architecture
 

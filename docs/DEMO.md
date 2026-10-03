@@ -9,7 +9,7 @@ No API keys. All commands run from the repo root.*
 ```bash
 export PATH="$HOME/.cargo/bin:$PATH"
 cargo test --workspace
-# expect: 60 passed, 0 failed, 2 ignored
+# expect: 62 passed, 0 failed, 2 ignored
 cargo clippy --workspace -- -D warnings   # expect: clean
 ```
 
